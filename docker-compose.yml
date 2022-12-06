@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  mysqldb:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=kkgames123
+      - MYSQL_USER=kkgames
+      - MYSQL_PASSWORD=kkgames123
+      - MYSQL_DATABASE=kkgames
+    ports:
+      - "3307:3306"
+    restart: always
+  app:
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod"
+    restart: on-failure
+    ports:
+      - "6868:8080"
+    build:
+      context: ./GamingBlog
+      dockerfile: Dockerfile
+    depends_on:
+      - mysqldb
