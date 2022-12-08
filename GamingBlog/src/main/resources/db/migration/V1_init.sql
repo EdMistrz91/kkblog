@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS kkgames;
+
 DROP TABLE IF EXISTS game, comment, news, user;
 
 CREATE TABLE comment
