@@ -1,24 +1,27 @@
 package com.GamingBlog.gamingblog;
 
-import com.GamingBlog.gamingblog.service.StorageService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import javax.annotation.Resource;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class GamingBlogApplication implements CommandLineRunner {
-
-    @Resource
-    StorageService storageService;
+public class GamingBlogApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(GamingBlogApplication.class, args);
     }
 
     @Override
-    public void run(final String... args) throws Exception {
-        storageService.init();
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(GamingBlogApplication.class);
     }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 }
